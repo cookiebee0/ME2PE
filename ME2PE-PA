@@ -1,0 +1,46 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  int t=1,n,sc;
+  while(1)
+    {
+      cin>>n;
+      if(n==0)
+        break;
+      if(t!=1)
+        cout<<endl;
+      cin>>sc;
+      int a[n*n],svs=0,temp;
+      for(int i=0;i<n;i++)
+        {
+          int mi=99999999;
+          for(int j=0;j<n;j++)
+            {
+              cin>>temp;
+              int g=i*n+j;
+              a[i*n+j]=temp-sc;
+              if(a[g]<0)
+                a[g]*=-1;
+              mi=min(mi,a[g]);
+            }
+            svs+=mi;
+        }
+      int pvs=0;
+      sort(a,a+n*n);
+      for(int i=0;i<n;i++)
+        {
+          pvs+=a[i];
+        }
+      cout<<"Case "<<t<<": "<<pvs<<" VS. "<<svs<<endl;
+      if(pvs==svs)
+        cout<<"Perfect Teammate.";
+      else
+        cout<<"Just Teammate.";
+      t++;
+    }
+  return 0;
+}
