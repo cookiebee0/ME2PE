@@ -1,0 +1,23 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main()
+{
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+  int x;
+  while(cin>>x)
+  {
+    int t=1;
+    while(x!=1)
+    {
+      t++;
+      if(x%2==0)
+      x/=2;
+      else
+      x=(3*x+1);
+    }
+    cout<<t<<endl;
+  }
+  return 0;
+}
