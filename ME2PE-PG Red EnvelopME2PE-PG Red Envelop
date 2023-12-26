@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+struct r
+{
+  int num;
+  int rate;
+  int sum;
+};
+bool compare(const r& a, const r& b)
+{
+  return a.sum>b.sum;
+}
+int main()
+{
+  int x,n;
+  while(cin>>x>>n)
+  {
+    vector<r> rr(x);
+    for(int i=0;i<x;i++)
+    {
+      cin>>rr[i].num;
+    }
+    for(int i=0;i<x;i++)
+    {
+      cin>>rr[i].rate;
+      double temp=rr[i].num*rr[i].rate/100.00;
+      rr[i].sum=static_cast<int>(round(temp));
+    }
+    //
+    sort(rr.begin(),rr.end(),compare);
+    int total=0;
+    for(int i=0;i<n;i++)
+    {
+      cout<<rr[i].num<<" => "<<rr[i].sum<<endl;
+      total+=rr[i].sum;
+    }
+    cout<<total<<endl;
+  }
+  return 0;
+}
