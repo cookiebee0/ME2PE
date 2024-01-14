@@ -1,0 +1,82 @@
+//  "WA" can't find the wrong
+#include <iostream>
+#include <sstream>
+#include <stack>
+using namespace std;
+int main()
+{
+    string s;
+    while(getline(cin,s))
+    {
+        if(cin.fail())
+        break;
+        stringstream ss(s);
+        string temp;
+        int i=1,a[101];
+        while(ss>>temp)
+        {
+            if(temp=="None")
+            a[i]=-1;
+            else
+            {
+                a[i]=stoi(temp);
+            }
+            i++;
+        }
+        i--;
+        stack <int> st;
+        stack<int>().swap(st);
+        int tt=0,ti=1,sum=0;
+        while(tt+ti<i)
+        {
+            tt+=ti;
+            ti*=2;
+        }
+
+        for(int j=ti;j<=i;j++)
+        {
+            sum=0;
+            if(a[j]!=0&&a[j]!=-1)
+            {
+                st.push(j);
+                int t=j,check=0;
+                while(t!=1)
+                {
+                    if(a[t]==-1)
+                    check=1;
+                    t/=2;
+                    st.push(t);
+                }
+                
+                if(check==1)
+                {
+                    while(!st.empty())
+                    st.pop();
+                }
+                else
+                {
+                    //output
+                    cout<<"The route 0";//
+                    sum+=a[1];
+                    //
+                    st.pop();
+                    while(!st.empty())
+                    {
+                        int o=st.top();
+                        st.pop();
+                        sum+=a[o];
+                        cout<<"->"<<o-1;
+                    }
+                    cout<<" took "<<sum<<"."<<endl;
+                }
+            }
+        }
+        if(i==1&&a[i]==0)
+        cout<<"The route 0 took "<<a[1]<<"."<<endl;
+    }
+    return 0;
+}
+/*
+10 7 5 2 None 9 None
+0
+*/
